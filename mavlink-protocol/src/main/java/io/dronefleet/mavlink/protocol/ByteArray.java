@@ -1,5 +1,6 @@
 package io.dronefleet.mavlink.protocol;
 
+//바이트 배열에 관하여 정의하는 클래스
 class ByteArray {
     private final byte[] bytes;
 
@@ -11,9 +12,7 @@ class ByteArray {
         return (int) getLong(offset, 1);
     }
 
-    public void putInt8(int value, int offset) {
-        putLong(value, offset, 1);
-    }
+    public void putInt8(int value, int offset) {putLong(value, offset, 1);}
 
     public int getInt16(int offset) {
         return (int) getLong(offset, 2);

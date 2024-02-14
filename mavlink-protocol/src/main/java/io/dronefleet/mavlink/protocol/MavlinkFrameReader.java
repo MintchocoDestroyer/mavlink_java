@@ -18,6 +18,8 @@ import java.io.InputStream;
  * and CRC check the returned frames, issuing calls to {@link #drop()} when validation fails.
  */
 public class MavlinkFrameReader {
+    //데이터 처리에 사용할 데이터를 최소단위로 변환하여 생성하여 보낸다.
+    //이 때 변환한 데이터들은 전부 in에 저장된다
     private final TransactionalInputStream in;
 
     /**
@@ -37,7 +39,7 @@ public class MavlinkFrameReader {
      * has ended.
      * @throws IOException if an IO error occurs.
      */
-    public boolean next() throws IOException {
+    public boolean next() throws IOException {  //오류로 인한 종료를 막기 위해 로그로 오류를 던진다
         int versionMarker;
         int payloadLength;
         int incompatibleFlags;
@@ -67,14 +69,14 @@ public class MavlinkFrameReader {
      */
     public byte[] frame() {
         return in.getBuffer();
-    }
+    }   //프레임에 대한 바이트를 얻는다
 
     /**
      * Drops the last frame, returning its bytes to the stream, skipping its first byte.
      *
      * @throws IOException if an IO error occurs.
      */
-    public void drop() throws IOException {
+    public void drop() throws IOException { //초기상태로 돌아간다
         in.rollback();
         in.skip(1);
         in.commit();

@@ -12,24 +12,25 @@ import java.util.Arrays;
  * serializing, deserializing, signing and CRC validation of Mavlink protocol packets.
  */
 public class MavlinkPacket {
-
-    static final int MAGIC_V1 = 0xFE;
-    static final int MAGIC_V2 = 0xFD;
+    //어느쪽을 사용할 것인지에 대한 마스킹 연산 준비
+    static final int MAGIC_V1 = 0xFE;   //0b00000001
+    static final int MAGIC_V2 = 0xFD;   //0b00000010
     private static final int INCOMPAT_FLAG_SIGNED = 0x01;
+    //호환 되지 않는 패킷에 대해 플래그를 세워 마스킹
 
     /**
-     * Creates a signed Mavlink 2 packet.
+     * 신뢰성있는 마브링크2 패킷을 생성한다
      *
-     * @param sequence    The sequence of the packet to create.
-     * @param systemId    The system ID of the originator of this packet.
-     * @param componentId The component ID of the originator of this packet.
-     * @param messageId   The message ID of this packet
-     * @param crcExtra    The CRC extra corresponding to the message ID of this packet.
-     * @param payload     The payload of this packet.
-     * @param linkId      The link ID to use in the packet's signature.
-     * @param timestamp   The timestamp to use in the packet's signature.
-     * @param secretKey   The secret key to use in order to generate this packet's signature.
-     * @return A signed Mavlink 2 packet of the specified settings.
+     * @param sequence    패킷을 만들기 위한 과정.
+     * @param systemId    해당 패킷 발행자의 시스템 ID.
+     * @param componentId 해당 패킷의 발신자의 구성 요소 ID.
+     * @param messageId   해당 패킷의 메세지 ID.
+     * @param crcExtra    해당 패킷의 메시지 ID에 해당하는 CRC 여분.
+     * @param payload     해당 패킷의 페이로드.
+     * @param linkId      해당 패킷 서명에 사용할 링크 ID.
+     * @param timestamp   해당 패킷의 서명에 사용할 타임스탬프.
+     * @param secretKey   해당 패킷의 서명을 생성하는 데 사용할 비밀 키.
+     * @return 지정된 설정의 서명된 마브링크2 패킷.
      */
     public static MavlinkPacket createSignedMavlink2Packet(
             int sequence, int systemId, int componentId, int messageId,
@@ -54,15 +55,15 @@ public class MavlinkPacket {
     }
 
     /**
-     * Creates an unsigned Mavlink 2 packet.
+     * 신뢰성이 없는 마브링크2 패킷을 생성한다.
      *
-     * @param sequence    The sequence of the packet to create.
-     * @param systemId    The system ID of the originator of this packet.
-     * @param componentId The component ID of the originator of this packet.
-     * @param messageId   The message ID of this packet
-     * @param crcExtra    The CRC extra corresponding to the message ID of this packet.
-     * @param payload     The payload of this packet.
-     * @return An unsigned Mavlink 2 packet of the specified settings.
+     * @param sequence    패킷을 만들기 위한 과정.
+     * @param systemId    해당 패킷 발행자의 시스템 ID.
+     * @param componentId 해당 패킷의 발신자의 구성 요소 ID.
+     * @param messageId   해당 패킷의 메세지 ID.
+     * @param crcExtra    해당 패킷의 메시지 ID에 해당하는 CRC 여분.
+     * @param payload     해당 패킷의 페이로드.
+     * @return 지정된 설정의 서명된 마브링크2 패킷.
      */
     public static MavlinkPacket createUnsignedMavlink2Packet(
             int sequence, int systemId, int componentId, int messageId,
@@ -85,15 +86,15 @@ public class MavlinkPacket {
     }
 
     /**
-     * Creates a Mavlink 1 packet.
+     * 마브링크1 패킷을 생성한다.
      *
-     * @param sequence    The sequence of the packet to create.
-     * @param systemId    The system ID of the originator of this packet.
-     * @param componentId The component ID of the originator of this packet.
-     * @param messageId   The message ID of this packet
-     * @param crcExtra    The CRC extra corresponding to the message ID of this packet.
-     * @param payload     The payload of this packet.
-     * @return A Mavlink 1 packet of the specified settings.
+     * @param sequence    패킷을 만들기 위한 과정.
+     * @param systemId    해당 패킷 발행자의 시스템 ID.
+     * @param componentId 해당 패킷의 발신자의 구성 요소 ID.
+     * @param messageId   해당 패킷의 메세지 ID.
+     * @param crcExtra    해당 패킷의 메시지 ID에 해당하는 CRC 여분.
+     * @param payload     해당 패킷의 페이로드.
+     * @return 지정된 설정의 서명된 마브링크2 패킷.
      */
     public static MavlinkPacket createMavlink1Packet(
             int sequence, int systemId, int componentId, int messageId,
@@ -114,10 +115,10 @@ public class MavlinkPacket {
     }
 
     /**
-     * Parses a Mavlink 1 packet.
+     * 마브링크 1 패킷을 파싱한다.
      *
-     * @param rawBytes A Mavlink 1 packet frame to parse the packet from.
-     * @return The parsed Mavlink 1 packet.
+     * @param rawBytes 마브링크 1 패킷, 패킷 프레임을 해석.
+     * @return 마브링크 1 패킷을 다시 파싱한다.
      */
     public static MavlinkPacket fromV1Bytes(byte[] rawBytes) {
         ByteArray bytes = new ByteArray(rawBytes);
@@ -134,10 +135,10 @@ public class MavlinkPacket {
     }
 
     /**
-     * Parses a Mavlink 2 packet.
+     * 마브링크 2 패킷을 파싱한다.
      *
-     * @param rawBytes A Mavlink 2 frame to parse the packet from.
-     * @return The parsed Mavlink 2 packet.
+     * @param rawBytes 마브링크 2 패킷, 패킷 프레임을 해석.
+     * @return 마브링크 2 패킷을 다시 파싱한다.
      */
     public static MavlinkPacket fromV2Bytes(byte[] rawBytes) {
         ByteArray bytes = new ByteArray(rawBytes);
@@ -162,15 +163,15 @@ public class MavlinkPacket {
     }
 
     /**
-     * Generates a CRC.
+     * CRC 생성.
      *
-     * @param packetBytes The packet bytes to generate a CRC for. This method
-     *                    will only consume bytes up to the expected position
-     *                    of the CRC, so it is safe to pass frames that are longer
-     *                    than the CRC position in a frame. The packet bytes are
-     *                    expected to include the version marker (or STX).
-     * @param crcExtra    The CRC extra of the message of this packet.
-     * @return The generated CRC checksum.
+     * @param packetBytes CRC를 생성할 패킷 바이트. 이 메서드는
+     *                    예상 위치까지의 바이트만 소비
+     *                    CRC의 경우, 더 긴 프레임을 통과시키는 것이 안전
+     *                    프레임의 CRC 위치보다. 패킷 바이트는
+     *                    버전 마커(또는 STX)가 포함될 것으로 예상됨
+     * @param crcExtra    해당 패킷의 메시지의 CRC 추가 항목.
+     * @return CRC 체크섬 생성.
      */
     public static int generateCrc(byte[] packetBytes, int crcExtra) {
         if (packetBytes.length < 3) {
@@ -196,13 +197,13 @@ public class MavlinkPacket {
     }
 
     /**
-     * Generates a Mavlink 2 signature.
+     * 마브링크 2의 서명 생성.
      *
-     * @param packetBytes The bytes of the packet to generate the signature for.
-     * @param linkId      The signature's link ID.
-     * @param timestamp   The signature's timestamp.
-     * @param secretKey   The secret key to use in order to generate the signature's hash.
-     * @return The generated signature.
+     * @param packetBytes 서명을 생성할 패킷의 바이트 수.
+     * @param linkId      서명의 링크 ID.
+     * @param timestamp   서명의 타임스탬프.
+     * @param secretKey   서명의 해시를 생성하는 데 사용할 비밀 키.
+     * @return 서명 생성.
      */
     public static byte[] generateSignature(
             byte[] packetBytes, int linkId, long timestamp, byte[] secretKey) {
@@ -271,133 +272,130 @@ public class MavlinkPacket {
     }
 
     /**
-     * Returns this packet's version marker (STX). The result is 0xFE for a version 1 packet,
-     * or 0xFD for a version 2 packet.
+     * 해당 패킷의 버전 마커(STX)를 반환. 결과는 버전 1 패킷의 경우 0xFE,
+     * 버전 2의 경우 0xFD.
      */
     public int getVersionMarker() {
         return versionMarker;
     }
 
     /**
-     * Returns this packet's incompatibility flags. Incompatibility flags are used to indicate
-     * features that a MAVLink library must support in order to be able to handle the packet.
-     * This includes any feature that affects the packet format/ordering. If any flag in
-     * this bitmask is not understood, the packet must be dropped.
+     * 이 패킷의 비호환성 플래그를 반환합니다. 비호환성 플래그는 다음을 나타내는 데 사용됩니다
+     * MAVLink 라이브러리가 패킷을 처리하기 위해 지원해야 하는 기능입니다.
+     * 여기에는 패킷 형식/순서에 영향을 미치는 모든 기능이 포함됩니다. 만약 에 플래그가 있다면
+     * 이 비트 마스크는 이해할 수 없으며 패킷을 삭제해야 합니다.
      */
     public int getIncompatibleFlags() {
         return incompatibleFlags;
     }
 
     /**
-     * Returns this packet's compatibility flags. Compatibility flags are used to indicate features
-     * won't prevent a library from handling the packet (even if the feature is not understood).
-     * This might include, for example, a flag to indicate that a packet should be treated as
-     * "high priority" (such a messages could be handled by any MAVLink implementation because
-     * packet format and structure is not affected).
+     * 이 패킷의 호환성 플래그를 반환합니다. 호환성 플래그는 기능을 나타내는 데 사용됩니다
+     * 라이브러리가 패킷을 처리하는 것을 방해하지 않습니다(기능이 이해되지 않더라도).
+     * 여기에는 예를 들어 패킷이 다음과 같이 처리되어야 함을 나타내는 플래그가 포함될 수 있습니다
+     * "high priority"(이러한 메시지는 모든 MAVLink 구현에서 처리할 수 있습니다.)
+     * 패킷 형식 및 구조는 영향을 받지 않습니다).
      */
     public int getCompatibleFlags() {
         return compatibleFlags;
     }
 
     /**
-     * Returns this packet's sequence number. The sequence number is a value between 0 to 255,
-     * which increments between consecutive packets. The sequence number resets to 0 once
-     * it has overflown the 8 bits available.
+     * 이 패킷의 시퀀스 번호를 반환합니다. 시퀀스 번호는 0에서 255 사이의 값입니다,
+     * 연속적인 패킷들 사이에서 증가합니다. 시퀀스 번호는 한 번 0으로 재설정됩니다
+     * 사용 가능한 8비트를 오버플로우했습니다.
      */
     public int getSequence() {
         return sequence;
     }
 
     /**
-     * Returns the system ID of the originator of this packet.
+     * 이 패킷의 발신자의 시스템 ID를 반환합니다.
      */
     public int getSystemId() {
         return systemId;
     }
 
     /**
-     * Returns the component ID of the originator of this packet.
+     * 이 패킷의 발신자의 구성 요소 ID를 반환합니다.
      */
     public int getComponentId() {
         return componentId;
     }
 
     /**
-     * Returns the message ID of this packet.
+     * 이 패킷의 메시지 ID를 반환합니다.
      */
     public int getMessageId() {
         return messageId;
     }
 
     /**
-     * Returns the payload of this packet. The payload content can be resolved by observing
-     * this packet's {@link #getMessageId() message id}.
+     * 이 패킷의 페이로드를 반환합니다. 페이로드 내용은 관찰을 통해 해결할 수 있습니다.
+     * 이 패킷의 {@link #getMessageId() message id}입니다
      */
     public byte[] getPayload() {
         return payload;
     }
 
     /**
-     * Returns this packet's CRC checksum.
+     * 이 패킷의 CRC 체크섬을 반환합니다.
      */
     public int getChecksum() {
         return checksum;
     }
 
     /**
-     * Returns the signature of this packet.
+     * 이 패킷의 서명을 반환합니다.
      *
-     * @return The signature of this packet, or an empty byte array if no signature
-     * was included in this packet.
+     * @return 이 패킷의 서명 또는 서명이 없는 경우 빈 바이트 배열
+     * 이 패킷에 포함되어 있습니다.
      */
     public byte[] getSignature() {
         return signature;
     }
 
     /**
-     * Returns a byte array containing the complete packet bytes, as they would be
-     * sent or received.
+     * 전체 패킷 바이트가 포함된 바이트 배열을 반환합니다
+     * 송신 또는 수신.
      */
     public byte[] getRawBytes() {
         return rawBytes;
     }
 
     /**
-     * Checks whether or not this is a version 2 packet.
+     * 버전 2 패킷인지 확인합니다.
      *
-     * @return {@code true} if this is a version 2 packet, or {@code false} otherwise.
+     * @return 마브링크 2의 패킷이라면 {@code true} , 아니면 {@code false}.
      */
     public boolean isMavlink2() {
         return versionMarker == MAGIC_V2;
     }
 
     /**
-     * Validate's this packet's CRC checksum.
+     * 이 패킷의 CRC 체크섬을 확인합니다.
      *
-     * @param crcExtra The CRC extra corresponding to this packet's message ID
-     * @return {@code true} if this packet's CRC checksum passes validation, or
-     * {@code false} otherwise.
+     * @param crcExtra 이 패킷의 메시지 ID에 해당하는 여분의 CRC
+     * @return 이 패킷의 CRC 체크섬이 유효성 검사를 통과한 경우 {@code true}, 아니면 {@code false}
      */
     public boolean validateCrc(int crcExtra) {
         return generateCrc(rawBytes, crcExtra) == checksum;
     }
 
     /**
-     * Checks whether this packet is signed.
+     * 이 패킷이 서명되었는지 확인합니다.
      *
-     * @return {@code true} if this packet's incompatibility flags denote that it is signed,
-     * or {@code false} otherwise.
+     * @return 이 패킷의 비호환성 플래그가 서명되었음을 나타내는 경우 {@code true}, 아니면 {@code false}
      */
     public boolean isSigned() {
         return ((incompatibleFlags & INCOMPAT_FLAG_SIGNED) != 0);
     }
 
     /**
-     * Validates this packet's signature.
+     * 이 패킷의 서명을 확인합니다.
      *
-     * @param secretKey The secret key to use when validating the signature.
-     * @return {@code true} if the signature is valid according to specified parameters,
-     * or {@code false} otherwise.
+     * @param secretKey 서명을 확인할 때 사용할 비밀 키.
+     * @return 서명이 지정된 매개 변수에 따라 유효한 경우 {@code true}, 아니면 {@code false}
      */
     public boolean validateSignature(byte[] secretKey) {
         return isSigned() &&
@@ -411,14 +409,14 @@ public class MavlinkPacket {
     }
 
     /**
-     * Returns the link ID of this packet's signature.
+     * 이 패킷의 서명의 링크 ID를 반환합니다.
      */
     public int getSignatureLinkId() {
         return isSigned() ? (signature[0] & 0xFF) : -1;
     }
 
     /**
-     * Returns the timestamp of this packet's signature.
+     * 이 패킷의 서명 타임스탬프를 반환합니다.
      */
     public long getSignatureTimestamp() {
         ByteArray bytes = new ByteArray(signature);
