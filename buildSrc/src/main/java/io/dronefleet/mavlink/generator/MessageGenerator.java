@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+//메세지 생성기
 public class MessageGenerator {
 
     private static final ClassName MAVLINK_MESSAGE_INFO = ClassName.get(

@@ -2,6 +2,7 @@ package io.dronefleet.mavlink.generator.definitions.model;
 
 import java.util.List;
 
+//열거형 마브링크 정의
 public class MavlinkEnumDef {
     private final String name;
     private final String description;

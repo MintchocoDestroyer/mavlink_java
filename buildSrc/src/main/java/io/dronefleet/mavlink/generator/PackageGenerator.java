@@ -10,6 +10,7 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+//패키지 생성기
 public class PackageGenerator {
 
     private static final ClassName MAVLINK_DIALECT = ClassName.get(

@@ -6,6 +6,7 @@ import javax.lang.model.element.Modifier;
 import java.math.BigInteger;
 import java.util.*;
 
+//필드 생성기
 public class FieldGenerator implements Comparable<FieldGenerator> {
     private static final ClassName MAVLINK_MESSAGE_FIELD = ClassName.get(
             "io.dronefleet.mavlink.annotations",

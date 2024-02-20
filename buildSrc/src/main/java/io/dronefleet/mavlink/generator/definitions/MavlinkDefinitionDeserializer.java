@@ -11,6 +11,7 @@ import java.io.InputStream;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+//마브링크 정의 병렬화 모듈
 public class MavlinkDefinitionDeserializer {
 
     public MavlinkDef deserialize(InputStream in, String name) throws XMLStreamException {

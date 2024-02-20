@@ -18,6 +18,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
+// 직렬화 마브링크 페이로드가 주입된 직렬화 반사 페이로드
 public class ReflectionPayloadSerializer implements MavlinkPayloadSerializer {
 
     private static final WireFieldInfoComparator wireComparator = new WireFieldInfoComparator();

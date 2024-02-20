@@ -1,5 +1,6 @@
 package io.dronefleet.mavlink.generator.definitions.model;
 
+//마브링크 매개변수 정의
 public class MavlinkParamDef {
     private final int index;
     private final String description;

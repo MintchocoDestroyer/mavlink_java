@@ -13,6 +13,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Arrays;
 
+//DefaultTask로 확장된 마브링크 생성기 작업목록
 public class MavlinkGeneratorTask extends DefaultTask {
 
     @InputDirectory

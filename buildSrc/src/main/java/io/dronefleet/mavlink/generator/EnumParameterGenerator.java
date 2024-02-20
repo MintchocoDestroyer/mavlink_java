@@ -1,5 +1,6 @@
 package io.dronefleet.mavlink.generator;
 
+//열거형 매개변수 생성기
 public class EnumParameterGenerator {
     private final PackageGenerator parentPackage;
     private final int index;

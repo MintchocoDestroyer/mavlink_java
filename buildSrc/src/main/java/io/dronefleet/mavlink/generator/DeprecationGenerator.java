@@ -2,6 +2,7 @@ package io.dronefleet.mavlink.generator;
 
 import com.squareup.javapoet.AnnotationSpec;
 
+//미사용 클래스 생성기
 public class DeprecationGenerator {
     private final boolean deprecated;
     private final String since;

@@ -13,6 +13,9 @@ import java.util.List;
 import java.util.Stack;
 import java.util.stream.Collectors;
 
+/*마브링크 생성기 공장
+생성기를 기반으로 여러 개의 마브링크를 찍어낸다
+*/
 public class MavlinkGeneratorFactory {
 
     private final String basePackage;

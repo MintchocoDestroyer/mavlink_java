@@ -2,7 +2,7 @@ package io.dronefleet.mavlink.generator.definitions.xml;
 
 import java.util.*;
 import java.util.stream.Collectors;
-
+//Xml 파일 구성요소 정의
 public class XmlElement {
     private final int index;
     private final String name;

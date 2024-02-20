@@ -1,5 +1,6 @@
 package io.dronefleet.mavlink.generator.definitions.model;
 
+//마브링크 필드 정의
 public class MavlinkFieldDef implements Comparable<MavlinkFieldDef> {
     private final int index;
     private final MavlinkTypeDef type;

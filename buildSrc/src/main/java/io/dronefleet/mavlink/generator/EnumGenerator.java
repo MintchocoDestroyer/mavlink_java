@@ -8,6 +8,7 @@ import javax.lang.model.element.Modifier;
 import java.util.ArrayList;
 import java.util.List;
 
+//열거형 클래스 생성기
 public class EnumGenerator {
 
     private static final ClassName MAVLINK_ENUM = ClassName.get(

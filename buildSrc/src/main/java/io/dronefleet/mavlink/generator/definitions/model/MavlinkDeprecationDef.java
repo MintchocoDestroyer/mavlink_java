@@ -1,5 +1,6 @@
 package io.dronefleet.mavlink.generator.definitions.model;
 
+//미사용 되는 마브링크 정의
 public class MavlinkDeprecationDef {
     private final String since;
     private final String replacedBy;

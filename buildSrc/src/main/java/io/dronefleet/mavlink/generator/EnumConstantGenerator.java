@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+//불변 열거형 클래스 생성기
 public class EnumConstantGenerator {
 
     private static final ClassName MAVLINK_ENUM_ENTRY = ClassName.get(

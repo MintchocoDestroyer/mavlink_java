@@ -18,6 +18,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
+// 병렬화 마브링크 페이로드가 주입된 병렬화 페이로드 반사 클래스
 public class ReflectionPayloadDeserializer implements MavlinkPayloadDeserializer {
 
     private static final WireFieldInfoComparator wireComparator = new WireFieldInfoComparator();

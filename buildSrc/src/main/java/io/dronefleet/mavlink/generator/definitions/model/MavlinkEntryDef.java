@@ -2,6 +2,7 @@ package io.dronefleet.mavlink.generator.definitions.model;
 
 import java.util.List;
 
+//마브링크 엔트리 정의
 public class MavlinkEntryDef {
     private final Integer value;
     private final String name;

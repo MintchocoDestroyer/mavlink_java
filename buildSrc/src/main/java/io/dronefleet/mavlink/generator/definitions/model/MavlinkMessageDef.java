@@ -2,6 +2,7 @@ package io.dronefleet.mavlink.generator.definitions.model;
 
 import java.util.List;
 
+//마브링크 메세지 정의
 public class MavlinkMessageDef {
     private final int id;
     private final String name;

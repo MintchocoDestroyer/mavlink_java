@@ -3,6 +3,7 @@ package io.dronefleet.mavlink.generator.definitions.model;
 import java.util.HashMap;
 import java.util.Map;
 
+//마브링크 형식 정의
 public class MavlinkTypeDef {
 
     private static final Map<String, Integer> typeLengths = new HashMap<String, Integer>() {{
